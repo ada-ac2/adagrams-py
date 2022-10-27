@@ -1,10 +1,12 @@
 import random
 
+# Dictionary of letters and available number of duplicates of each letter
 POOL_LETTERS_DICT = {
                         'A': 9, 'B': 2, 'C': 2, 'D': 4, 'E': 12, 'F': 2, 'G': 3, 'H': 2, 'I': 9, 
                         'J': 1, 'K': 1, 'L': 4, 'M': 2, 'N': 6, 'O': 8, 'P': 2, 'Q': 1, 'R': 6, 
                         'S': 4, 'T': 6, 'U': 4, 'V': 2, 'W': 2, 'X': 1, 'Y': 2, 'Z': 1 }
 
+# Dictionary of letters and points it give to the user. keys: points, values: lists of letters
 SCORE_CHART = {
                 1: ['A', 'E', 'I', 'O', 'U', 'L', 'N', 'R', 'S', 'T'],
                 2: ['D', 'G'],
@@ -17,6 +19,11 @@ SCORE_CHART = {
 
 
 def create_pool_letters_list(POOL_LETTERS_DICT):
+    '''
+    This function convert POOL_LETTERS_DICT into the available_letters_list;
+    has parameter = POOL_LETTERS_DICT;
+    Returns available_letters_list which contain letters duplicates as shown in value of the key(letter) in dictionary
+    '''  
     available_letters_list = list()
     for letter in POOL_LETTERS_DICT:
         for i in range(POOL_LETTERS_DICT[letter]):
@@ -24,6 +31,10 @@ def create_pool_letters_list(POOL_LETTERS_DICT):
     return available_letters_list
 
 def draw_letters():
+    '''
+    This function has no parameters;
+    Returns an array of ten strings (each one letter which randomly drawn from available_letters_list
+    '''    
     number_of_letters = 10
     all_letter_list = create_pool_letters_list(POOL_LETTERS_DICT)
     player_letters_list = ['','','','','','','','','','']
@@ -33,6 +44,11 @@ def draw_letters():
     return player_letters_list
 
 def uses_available_letters(word, letter_bank):
+    '''
+    This function has two parameters: input word (string) letter_bank (array of drawn letters from draw_letters function)
+    Returns True if every letter in the input word is in the letter_bank
+    Returns False if there is a letter in input that is not present in the letter_bank or has too much of compared to the letter_bank
+    '''
     checked_word = list()
     word_ls = []
     word_ls[:] = word.upper()
@@ -48,6 +64,12 @@ def uses_available_letters(word, letter_bank):
     return False
 
 def score_word(word):
+    '''
+    This function has one parameter: word, which is a string of characters
+    Returns an integer representing the number of points
+    Each letter within word has a point value (located in SCORE_CHART dictionary)
+    If the length of the word is 7, 8, 9, or 10, then the word gets an additional 8 points
+    '''
     user_points = 0
     word_ls = []
     word_ls[:] = word.upper()
@@ -60,6 +82,14 @@ def score_word(word):
     return user_points
 
 def get_highest_word_score(word_list):
+    '''
+    This function has one parameter - word_list( list of strings)
+    Returns a tuple that represents the data of a winning word and it's score.
+    In the case of tie in scores:
+        1 - the word which has 10 letters
+        2 - prefer the word with the fewest letters
+        3 - the first one in the supplied list
+    '''
     users_score = 0
     max_score = 0
     max_word = ''
