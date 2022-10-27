@@ -5,6 +5,16 @@ POOL_LETTERS_DICT = {
                         'J': 1, 'K': 1, 'L': 4, 'M': 2, 'N': 6, 'O': 8, 'P': 2, 'Q': 1, 'R': 6, 
                         'S': 4, 'T': 6, 'U': 4, 'V': 2, 'W': 2, 'X': 1, 'Y': 2, 'Z': 1 }
 
+SCORE_CHART = {
+                1: ['A', 'E', 'I', 'O', 'U', 'L', 'N', 'R', 'S', 'T'],
+                2: ['D', 'G'],
+                3: ['B', 'C', 'M', 'P'],
+                4: ['F', 'H', 'V', 'W', 'Y'],
+                5: ['K'],
+                8: ['J', 'X'],
+                10: ['Q', 'Z'] 
+}
+
 
 def create_pool_letters_list(POOL_LETTERS_DICT):
     available_letters_list = list()
@@ -38,7 +48,16 @@ def uses_available_letters(word, letter_bank):
     return False
 
 def score_word(word):
-    pass
+    user_points = 0
+    word_list = []
+    word_list[:] = word.upper()
+    if len(word_list)>= 7:
+        user_points = 8
+    for element in SCORE_CHART:
+        for letter in word_list:
+            if letter in SCORE_CHART[element]:
+                user_points += element
+    return user_points
 
 def get_highest_word_score(word_list):
     pass
