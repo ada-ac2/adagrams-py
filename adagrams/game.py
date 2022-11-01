@@ -1,5 +1,9 @@
+import random
+
 def draw_letters():
-    return ["a", "s", "m", "l", "q", "k", "e", "o", "w", "d"]
+    letters =  ["a", "s", "m", "l", "q", "k", "e", "o", "w", "d"]
+    random.shuffle(letters)
+    return letters
 
 def uses_available_letters(word, letter_bank):
     pass
