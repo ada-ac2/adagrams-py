@@ -1,5 +1,6 @@
 import random
 from collections import Counter
+import copy
 LETTER_POOL = {
     'A': 9, 
     'B': 2, 
@@ -32,17 +33,19 @@ LETTER_POOL = {
 def draw_letters():
     count = 0
     result = []
+    deep_copy_dict = copy.deepcopy(LETTER_POOL)
     #print(result)
     while count < 10:
-        letter =  random.choice(list(LETTER_POOL.keys()))
+        letter =  random.choice(list(deep_copy_dict.keys()))
         #print(letter)
-        LETTER_POOL[letter] -= 1
+        deep_copy_dict[letter] -= 1
         #print(LETTER_POOL[letter])
         result.append(str(letter))
 
-        if LETTER_POOL[letter] == 0:
-            LETTER_POOL.pop(letter)
+        if deep_copy_dict[letter] == 0:
+            deep_copy_dict.pop(letter)
         count += 1
+    
     return result
 
 
@@ -52,32 +55,17 @@ def draw_letters():
 
 def uses_available_letters(word, letter_bank):
     word = word.upper()
-    #word_dict = {}
-    print(word)
-    print(letter_bank)
     new_word = "".join(word.split())
-
-    print(new_word)
-    d = Counter(new_word)
-    e = Counter(letter_bank)
-    print(d)
-
-
-
-    for key, value in d.items():
+    word_counter = Counter(new_word)
+    letter_bank_counter = Counter(letter_bank)
+    for key, value in word_counter.items():
         if key not in letter_bank:
             return False
-        elif key in letter_bank and value <= e[key]:
+        elif key in letter_bank and value <= letter_bank_counter[key]:
             return True
         else:
             return False
 
-
-
-
-
-
-    pass
 
 def score_word(word):
     pass
