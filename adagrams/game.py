@@ -115,21 +115,26 @@ def get_highest_word_score(word_list):
             word_score_dict[score] = [word]
         else:
             word_score_dict[score].append(word)
-    print(word_score_dict)
+   
     highest_scores = max(word_score_dict.keys())
-    print(highest_scores)
-    print(word_score_dict[highest_scores])
+    
     highest_score_word_lst = word_score_dict[highest_scores]
-
-    if len(highest_score_word_lst) == 1:
-        print(tuple(highest_score_word_lst))
-    #k = list(map(len(),highest_score_word_lst))
-    #print(k)
-    #q = list(zip(k,highest_score_word_lst))
+    len_lst = []
+    result = []
     for word in highest_score_word_lst:
-        if len(word) == 10:
-            print(tuple(word, highest_scores))
-    
+        len_lst.append(len(word))
+    print(f"len_lst, {len_lst}")
+    if 10 in len_lst:
+        result.append(highest_score_word_lst[len_lst.index(10)])
+        result.append(highest_scores)
+        return tuple(result)
+    else:    
+        min_1 = min(len_lst)
+        min_index = len_lst.index(min_1)
+        print(highest_score_word_lst[min_index])
+        result.append(highest_score_word_lst[min_index])
+        result.append(highest_scores)
+        return tuple(result)
         
     
     
@@ -137,4 +142,4 @@ def get_highest_word_score(word_list):
         
         
     
-    pass
+   
