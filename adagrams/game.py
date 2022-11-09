@@ -46,9 +46,17 @@ def draw_letters():
     return drawn_letters
 
 
-
 def uses_available_letters(word, letter_bank):
-    pass
+    letters_from_word = list(word.upper())
+    for letter in letters_from_word:
+        if letter in letter_bank:
+            letters_from_word_freq = letters_from_word.count(letter)
+            letters_from_bank_freq = letter_bank.count(letter)
+            if letters_from_word_freq > letters_from_bank_freq:
+                return False
+        else:
+            return False
+    return True
 
 def score_word(word):
     pass
