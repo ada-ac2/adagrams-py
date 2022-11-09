@@ -61,14 +61,80 @@ def uses_available_letters(word, letter_bank):
     for key, value in word_counter.items():
         if key not in letter_bank:
             return False
-        elif key in letter_bank and value <= letter_bank_counter[key]:
-            return True
-        else:
-            return False
+        elif key in letter_bank :
+            if value <= letter_bank_counter[key]:
+                continue
+            else:
+                return False
 
+    return True
 
+Score_chart = {
+    'A': 1, 
+    'B': 3, 
+    'C': 3, 
+    'D': 2, 
+    'E': 1, 
+    'F': 4, 
+    'G': 2, 
+    'H': 4, 
+    'I': 1, 
+    'J': 8, 
+    'K': 5, 
+    'L': 1, 
+    'M': 3, 
+    'N': 1, 
+    'O': 1, 
+    'P': 3, 
+    'Q': 10, 
+    'R': 1, 
+    'S': 1, 
+    'T': 1, 
+    'U': 1, 
+    'V': 4, 
+    'W': 4, 
+    'X': 8, 
+    'Y': 4, 
+    'Z': 10
+}
 def score_word(word):
-    pass
+    score = 0
+    word = word.upper()
+    new_word = "".join(word.split())
+    for cha in new_word:
+        score += Score_chart[cha]
+    if 7 <= len(new_word) <= 10:
+        score += 8
+    return score
 
 def get_highest_word_score(word_list):
+    word_score_dict = {}
+    for word in word_list:
+        score = score_word(word)
+        if score not in word_score_dict.keys():
+            word_score_dict[score] = [word]
+        else:
+            word_score_dict[score].append(word)
+    print(word_score_dict)
+    highest_scores = max(word_score_dict.keys())
+    print(highest_scores)
+    print(word_score_dict[highest_scores])
+    highest_score_word_lst = word_score_dict[highest_scores]
+
+    if len(highest_score_word_lst) == 1:
+        print(tuple(highest_score_word_lst))
+    #k = list(map(len(),highest_score_word_lst))
+    #print(k)
+    #q = list(zip(k,highest_score_word_lst))
+    for word in highest_score_word_lst:
+        if len(word) == 10:
+            print(tuple(word, highest_scores))
+    
+        
+    
+    
+
+        
+        
+    
     pass
