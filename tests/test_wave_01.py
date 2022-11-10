@@ -31,6 +31,7 @@ LETTER_POOL = {
     'Z': 1
 }
 
+
 def test_draw_letters_draws_ten():
     # Arrange/Act
     letters = draw_letters()
