@@ -1,4 +1,5 @@
 import random
+from collections import defaultdict
 
 LETTER_POOL = {
     'A': 9, 
@@ -38,8 +39,17 @@ def draw_letters():
     return available_letters
 
 
-def uses_available_letters(word, letter_bank):
-    pass
+def uses_available_letters(word, letter_bank): 
+    available_letters = defaultdict(int)
+    for letter in letter_bank:
+        available_letters[letter] += 1
+    
+    for character in word:
+        character = character.upper() # ignore case difference
+        if character not in available_letters or available_letters[character] == 0:
+            return False
+        available_letters[character] -= 1
+    return True
 
 def score_word(word):
     pass
