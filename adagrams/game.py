@@ -36,7 +36,7 @@ SCORE_CHART = {
 }
 
 def draw_letters():
-    letters = LETTER_POOL.keys()
+    letters = list(LETTER_POOL.keys())
     counts = LETTER_POOL.values()
     available_letters = random.sample(letters, counts=counts, k=10)
     return available_letters
