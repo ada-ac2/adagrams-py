@@ -59,10 +59,28 @@ def score_word(word):
     if len(word) >= 7:
         total_score += 8
     for character in word:
-        character = character.upper() # igonre case difference
+        character = character.upper() # ignore case difference
         indiviual_score = SCORE_CHART[character]
         total_score +=  indiviual_score
     return total_score
 
 def get_highest_word_score(word_list):
-    pass
+    # Check the score in the word_list one by one.
+    # If new score is higher or score is the same with current highest score:
+    #  - if current word's length is 10 or length is same as new word, keep original one
+    #  - if current word's length is longer than the new word or new word's length is 10, take the new word
+    cur_score = 0
+    cur_word = ""
+    for word in word_list:
+        score = score_word(word)
+        if score > cur_score:
+            cur_score = score
+            cur_word = word
+        elif score == cur_score:  
+            cur_length = len(cur_word)  
+            if cur_length != 10:   # exception: need to keep the length 10 word.
+                if len(word) < cur_length or len(word) == 10: 
+                    cur_word = word
+    return cur_word, cur_score
+
+
