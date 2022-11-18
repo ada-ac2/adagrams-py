@@ -29,7 +29,6 @@ def draw_letters():
     'Y': 2, 
     'Z': 1
     }
-    string.ascii_letters
 
     letters_drawn_in_hand = []
     letter_count = 0
