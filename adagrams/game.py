@@ -6,7 +6,9 @@ def draw_letters():
     # important to do this twice!
     random.shuffle(letters)
     letters = letters.upper()
-    
+    # wow, three times?! That's what they say!
+    random.shuffle(letters)
+
     return letters
 
 def uses_available_letters(word, letter_bank):
