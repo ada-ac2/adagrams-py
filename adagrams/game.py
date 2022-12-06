@@ -5,6 +5,7 @@ def draw_letters():
     random.shuffle(letters)
     # important to do this twice!
     random.shuffle(letters)
+    letters = letters.upper()
     
     return letters
 
